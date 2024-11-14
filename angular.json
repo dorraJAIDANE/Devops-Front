@@ -71,7 +71,9 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "dorra:build"
+            "browserTarget": "dorra:build",
+          "proxyConfig": "proxy.conf.json"
+
           }
         },
         "test": {
@@ -98,4 +100,5 @@
   "cli": {
     "analytics": "5476dca2-912d-4e17-b11e-5a088f9480bc"
   }
+  
 }
