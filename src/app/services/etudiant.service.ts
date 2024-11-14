@@ -7,7 +7,7 @@ import { Etudiant } from '../models/etudiant';
   providedIn: 'root',
 })
 export class EtudiantService {
-  private apiUrl = 'http://192.168.1.16:8282/tpFoyer17/api/etudiants'; // URL de votre API backend
+  private apiUrl = 'http://192.168.1.16:8082/tpFoyer17/api/etudiants'; // URL de votre API backend
 
   constructor(private http: HttpClient) {}
 
