@@ -7,7 +7,7 @@ import { Bloc } from '../models/bloc';
   providedIn: 'root'
 })
 export class BlocService {
-  private apiUrl = 'http://192.168.1.16:8282/tpFoyer17/api/blocs';
+  private apiUrl = 'http://192.168.1.16:8082/tpFoyer17/api/blocs';
 
   constructor(private http: HttpClient) {}
 
