@@ -8,7 +8,7 @@ import { Foyer } from '../models/foyer';
 })
 export class FoyerService {
 
-  private apiUrl = 'http://192.168.1.16:8282/api/foyers'; // Remplacer par l'URL de votre API
+  private apiUrl = 'http://192.168.1.16:8082/api/foyers'; // Remplacer par l'URL de votre API
 
   constructor(private http: HttpClient) { }
 
