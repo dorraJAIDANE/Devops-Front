@@ -1,0 +1,126 @@
+<!-- Titre et liste déroulante pour sélectionner une chambre -->
+<div class="d-flex align-items-center mb-3">
+  <h3 class="me-3">Liste des chambres</h3>
+  <select class="form-select w-auto" (change)="onChambreSelected($event)">
+    <option *ngFor="let chambre of chambres" [value]="chambre.idChambre">{{ chambre.numeroChambre }}</option>
+  </select>
+</div>
+
+<!-- Tableau des chambres avec le bloc affecté -->
+<div *ngIf="chambres.length > 0; else noData">
+  <table class="table table-striped table-hover">
+    <thead>
+    <tr>
+      <th>Numéro de Chambre</th>
+      <th>Type de Chambre</th>
+      <th>Bloc Affecté</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let chambre of chambres"> <!-- Boucle ngFor pour chaque chambre -->
+      <td>{{ chambre.numeroChambre }}</td>
+      <td>{{ chambre.typeChambre }}</td>
+      <td>{{ chambre.bloc?.nomBloc || 'Non Affecté' }}</td> <!-- Accès à chambre.bloc, pas chambres.bloc -->
+      <td>
+        <button class="btn btn-primary btn-sm" (click)="selectChambreForUpdate(chambre)">Mettre à jour</button>
+        <button class="btn btn-danger btn-sm ms-2" (click)="deleteChambre(chambre.idChambre)">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<ng-template #noData>
+  <p class="text-muted">Aucune chambre trouvée.</p>
+</ng-template>
+
+<!-- Formulaires d'ajout et de recherche sous forme de tableau -->
+<div class="mt-4">
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Opération</th>
+      <th>Entrée</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- Form for adding a chambre -->
+    <tr>
+      <td>Ajouter une chambre</td>
+      <td>
+        <input #numeroChambre type="number" class="form-control mb-1" placeholder="Numéro de chambre">
+        <select [(ngModel)]="typeChambre" class="form-select">
+          <option *ngFor="let type of typeChambreOptions" [ngValue]="type">{{ type }}</option>
+        </select>
+      </td>
+      <td>
+        <button class="btn btn-primary" (click)="addChambre(+numeroChambre.value, typeChambre)">Ajouter</button>
+      </td>
+    </tr>
+
+    <!-- Form for Updating Chambre -->
+    <div *ngIf="selectedChambre">
+      <h3>Mise à jour de la chambre</h3>
+      <input [(ngModel)]="selectedChambre.numeroChambre" type="number" class="form-control mb-1" placeholder="Numéro de chambre">
+      <select [(ngModel)]="selectedChambre.typeChambre" class="form-select mb-3">
+        <option *ngFor="let type of typeChambreOptions" [ngValue]="type">{{ type }}</option>
+      </select>
+      <button class="btn btn-success" (click)="updateChambre()">Confirmer Mise à jour</button>
+    </div>
+
+
+
+    <!-- Formulaire pour trouver une chambre par ID -->
+    <tr>
+      <td>Recherche de chambre par ID</td>
+      <td>
+        <input #chambreIdInput type="number" class="form-control" placeholder="ID de la chambre">
+      </td>
+      <td>
+        <button class="btn btn-secondary" (click)="findChambreById(+chambreIdInput.value)">Rechercher</button>
+      </td>
+    </tr>
+
+    <!-- Formulaire pour trouver des chambres par type -->
+    <tr>
+      <td>Recherche de chambres par type</td>
+      <td>
+        <select [(ngModel)]="typeChambre" class="form-select">
+          <option *ngFor="let type of typeChambreOptions" [ngValue]="type">{{ type }}</option>
+        </select>
+      </td>
+      <td>
+        <button class="btn btn-secondary" (click)="getChambresByType()">Rechercher par type</button>
+      </td>
+    </tr>
+
+    <!-- Formulaire pour affecter une chambre à un bloc -->
+    <div class="mt-4">
+      <h4>Affecter une Chambre à un Bloc</h4>
+      <div class="row">
+        <div class="col-md-6">
+          <label for="chambreSelect">Sélectionnez la Chambre</label>
+          <select id="chambreSelect" [(ngModel)]="selectedChambre" class="form-select">
+            <option *ngFor="let chambre of chambres" [ngValue]="chambre">{{ chambre.numeroChambre }}</option>
+          </select>
+        </div>
+        <div class="col-md-6">
+          <label for="blocIdInput">ID du Bloc</label>
+          <input type="number" id="blocIdInput" [(ngModel)]="idBloc" class="form-control" placeholder="ID du Bloc">
+        </div>
+      </div>
+      <div class="mt-3">
+        <button class="btn btn-primary" (click)="affecterChambreABloc(selectedChambre?.idChambre!, idBloc)">
+          Affecter au Bloc
+        </button>
+      </div>
+    </div>
+
+
+
+    </tbody>
+  </table>
+</div>

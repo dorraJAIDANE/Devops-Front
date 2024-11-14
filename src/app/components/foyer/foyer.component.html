@@ -1,0 +1,72 @@
+<div class="container">
+    <!-- Affichage des foyers -->
+    <h2>Liste des foyers</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nom</th>
+          <th>Adresse</th>
+          <th>Capacité</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let foyer of foyers">
+          <td>{{ foyer.idFoyer }}</td>
+          <td>{{ foyer.nomFoyer }}</td>
+          <td>{{ foyer.adresse }}</td>
+          <td>{{ foyer.capaciteFoyer }}</td>
+          <td>
+            <button class="btn btn-info" (click)="selectFoyer(foyer)">Modifier</button>
+            <button class="btn btn-danger" (click)="deleteFoyer(foyer.idFoyer)">Supprimer</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Formulaire d'ajout de foyer -->
+    <h3>Ajouter un nouveau foyer</h3>
+    <form (ngSubmit)="addFoyer()">
+      <div class="form-group">
+        <label for="nomFoyer">Nom du foyer</label>
+        <input type="text" id="nomFoyer" class="form-control" [(ngModel)]="newFoyer.nomFoyer" name="nomFoyer" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="adresse">Adresse</label>
+        <input type="text" id="adresse" class="form-control" [(ngModel)]="newFoyer.adresse" name="adresse" required />
+      </div>
+  
+      <div class="form-group">
+        <label for="capaciteFoyer">Capacité</label>
+        <input type="number" id="capaciteFoyer" class="form-control" [(ngModel)]="newFoyer.capaciteFoyer" name="capaciteFoyer" required />
+      </div>
+  
+      <button type="submit" class="btn btn-primary">Ajouter</button>
+    </form>
+  
+    <!-- Formulaire de mise à jour de foyer -->
+    <div *ngIf="selectedFoyer" class="form-container">
+      <h3>Modifier le foyer</h3>
+      <form (ngSubmit)="updateFoyer()">
+        <div class="form-group">
+          <label for="nomFoyer">Nom du foyer</label>
+          <input type="text" id="nomFoyer" class="form-control" [(ngModel)]="selectedFoyer.nomFoyer" name="nomFoyer" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="adresse">Adresse</label>
+          <input type="text" id="adresse" class="form-control" [(ngModel)]="selectedFoyer.adresse" name="adresse" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="capaciteFoyer">Capacité</label>
+          <input type="number" id="capaciteFoyer" class="form-control" [(ngModel)]="selectedFoyer.capaciteFoyer" name="capaciteFoyer" required />
+        </div>
+  
+        <button type="submit" class="btn btn-success">Mettre à jour</button>
+      </form>
+    </div>
+  </div>
+  

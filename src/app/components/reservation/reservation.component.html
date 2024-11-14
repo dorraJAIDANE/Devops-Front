@@ -1,0 +1,32 @@
+<!-- reservation.component.html -->
+
+<div class="container">
+    <!-- Affichage des réservations -->
+    <h2>Liste des réservations</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Année universitaire</th>
+          <th>Chambre</th>
+          <th>Étudiant (CIN)</th>
+          <th>Statut</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reservation of reservations">
+          <td>{{ reservation.idReservation }}</td>
+          <td>{{ reservation.anneeUniversitaire }}</td>
+          <td>{{ reservation.idChambre }}</td>
+          <td>{{ reservation.cinEtudiant }}</td>
+          <td>{{ reservation.estValide ? 'Valide' : 'Invalide' }}</td>
+          <td>
+            <!-- Bouton pour sélectionner une réservation -->
+            <button class="btn btn-info" (click)="selectReservation(reservation)">Modifier</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+   

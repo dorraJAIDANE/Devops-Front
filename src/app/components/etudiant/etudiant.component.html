@@ -1,0 +1,96 @@
+<div class="container">
+    <h1>Gestion des Étudiants</h1>
+  
+    <!-- Liste des étudiants sous forme de tableau -->
+    <div class="etudiants-list">
+      <h2>Liste des Étudiants</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Nom</th>
+            <th>Prénom</th>
+            <th>CIN</th>
+            <th>Date de Naissance</th>
+            <th>Opérations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let etudiant of etudiants">
+            <td>{{ etudiant.nomEtudiant }}</td>
+            <td>{{ etudiant.prenomEtudiant }}</td>
+            <td>{{ etudiant.cinEtudiant }}</td>
+            <td>{{ etudiant.dateNaissance | date: 'dd/MM/yyyy' }}</td>
+            <td>
+              <!-- Boutons d'actions sous forme de groupe -->
+              <div class="btn-group" role="group">
+                <button class="btn btn-warning" (click)="selectEtudiant(etudiant)">Modifier</button>
+                <button class="btn btn-danger" (click)="deleteEtudiant(etudiant.idEtudiant)">Supprimer</button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Bouton Ajouter un étudiant dans la colonne opérations -->
+      <div class="btn-group" role="group">
+        <button class="btn btn-primary" (click)="toggleForm()">Ajouter un Étudiant</button>
+      </div>
+    </div>
+  
+    <!-- Ajouter un étudiant -->
+    <div *ngIf="isFormVisible" class="add-etudiant">
+      <h2>Ajouter un Étudiant</h2>
+      <form (ngSubmit)="addEtudiant()">
+        <div class="form-group">
+          <label for="nomEtudiant">Nom</label>
+          <input type="text" id="nomEtudiant" [(ngModel)]="newEtudiant.nomEtudiant" name="nomEtudiant" class="form-control" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="prenomEtudiant">Prénom</label>
+          <input type="text" id="prenomEtudiant" [(ngModel)]="newEtudiant.prenomEtudiant" name="prenomEtudiant" class="form-control" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="cinEtudiant">CIN</label>
+          <input type="number" id="cinEtudiant" [(ngModel)]="newEtudiant.cinEtudiant" name="cinEtudiant" class="form-control" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="dateNaissance">Date de Naissance</label>
+          <input type="date" id="dateNaissance" [(ngModel)]="newEtudiant.dateNaissance" name="dateNaissance" class="form-control" required>
+        </div>
+  
+        <button type="submit" class="btn btn-success">Ajouter</button>
+      </form>
+    </div>
+  
+    <!-- Modifier un étudiant -->
+    <div *ngIf="selectedEtudiant" class="edit-etudiant">
+      <h2>Modifier un Étudiant</h2>
+      <form (ngSubmit)="updateEtudiant()">
+        <div class="form-group">
+          <label for="nomEtudiant">Nom</label>
+          <input type="text" id="nomEtudiant" [(ngModel)]="selectedEtudiant.nomEtudiant" name="nomEtudiant" class="form-control" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="prenomEtudiant">Prénom</label>
+          <input type="text" id="prenomEtudiant" [(ngModel)]="selectedEtudiant.prenomEtudiant" name="prenomEtudiant" class="form-control" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="cinEtudiant">CIN</label>
+          <input type="number" id="cinEtudiant" [(ngModel)]="selectedEtudiant.cinEtudiant" name="cinEtudiant" class="form-control" required>
+        </div>
+  
+        <div class="form-group">
+          <label for="dateNaissance">Date de Naissance</label>
+          <input type="date" id="dateNaissance" [(ngModel)]="selectedEtudiant.dateNaissance" name="dateNaissance" class="form-control" required>
+        </div>
+  
+        <button type="submit" class="btn btn-success">Mettre à jour</button>
+      </form>
+    </div>
+  </div>
+  

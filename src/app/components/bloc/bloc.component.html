@@ -1,0 +1,96 @@
+<!-- Titre et liste déroulante pour sélectionner un bloc -->
+<div class="d-flex align-items-center mb-3">
+  <h3 class="me-3">Liste des blocs</h3>
+  <select class="form-select w-auto" (change)="onBlocSelected($event)">
+    <option *ngFor="let bloc of blocs" [value]="bloc.idBloc">{{ bloc.nomBloc }}</option>
+  </select>
+</div>
+
+<!-- Tableau des blocs avec options de suppression et mise à jour -->
+<div *ngIf="blocs.length > 0; else noData">
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Nom du Bloc</th>
+        <th>Capacité</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let bloc of blocs">
+        <td>{{ bloc.nomBloc }}</td>
+        <td>{{ bloc.capaciteBloc }}</td>
+        <td>
+          <button class="btn btn-danger btn-sm me-2" (click)="deleteBloc(bloc.idBloc!)">Supprimer</button>
+          <button class="btn btn-primary btn-sm" (click)="selectBlocForUpdate(bloc)">Mettre à jour</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #noData>
+  <p class="text-muted">Aucun bloc trouvé.</p>
+</ng-template>
+
+<!-- Formulaires d'ajout et de recherche sous forme de tableau -->
+<div class="mt-4">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Opération</th>
+        <th>Entrée</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- Formulaire pour ajouter un bloc -->
+      <tr>
+        <td>Ajouter un bloc</td>
+        <td>
+          <input #nomBloc type="text" class="form-control mb-1" placeholder="Nom du bloc">
+          <input #capaciteBloc type="number" class="form-control" placeholder="Capacité du bloc">
+        </td>
+        <td>
+          <button class="btn btn-primary" (click)="addBloc(nomBloc.value, +capaciteBloc.value)">Ajouter</button>
+        </td>
+      </tr>
+
+
+
+      <!-- Formulaire pour trouver des blocs par ID de foyer -->
+      <tr>
+        <td>Recherche de blocs par ID de foyer</td>
+        <td>
+          <input [(ngModel)]="idFoyer" type="number" class="form-control" placeholder="ID du foyer">
+        </td>
+        <td>
+          <button class="btn btn-secondary" (click)="findByFoyerIdFoyer()">Rechercher par foyer</button>
+        </td>
+      </tr>
+
+      <!-- Formulaire pour rechercher un bloc par ID -->
+      <tr>
+        <td>Recherche de bloc par ID</td>
+        <td>
+          <input #blocId type="number" class="form-control" placeholder="ID du bloc">
+        </td>
+        <td>
+          <button class="btn btn-secondary" (click)="findBlocById(+blocId.value)">Rechercher</button>
+        </td>
+      </tr>
+
+      <!-- Formulaire pour trouver un bloc par ID de chambre -->
+      <tr>
+        <td>Recherche de blocs par ID de chambre</td>
+        <td>
+          <input [(ngModel)]="idChambre" type="number" class="form-control" placeholder="ID de la chambre">
+        </td>
+        <td>
+          <button class="btn btn-secondary" (click)="findByChambresIdChambre()">Rechercher par chambre</button>
+        </td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
