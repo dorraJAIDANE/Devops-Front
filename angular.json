@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "/dist/front_yacine",
+            "outputPath": "dist/front_yacine",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [
@@ -94,8 +94,5 @@
         }
       }
     }
-  },
-  "cli": {
-    "analytics": false
   }
 }
