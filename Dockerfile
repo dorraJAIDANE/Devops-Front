@@ -10,7 +10,6 @@ RUN npm install --force
 
 # Copier le reste des fichiers et construire l'application Angular
 COPY . .
-
 RUN npm run build --prod
 
 # Étape 2 : Préparer le serveur Nginx pour déployer l'application
